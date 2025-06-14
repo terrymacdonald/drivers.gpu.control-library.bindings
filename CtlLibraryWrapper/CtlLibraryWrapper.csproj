@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="powershell.exe -ExecutionPolicy Bypass -File Scripts\enum_uint.ps1" />
+    <Exec Command="exit; powershell.exe -ExecutionPolicy Bypass -File Scripts\enum_uint.ps1" />
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

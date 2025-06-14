@@ -15,8 +15,6 @@
 
 // use the following to have int indexes instead of uint (size_t)
 %apply int { size_t nelements, size_t index }
-%apply unsigned long long { size_t };
-%apply const unsigned long long & { const size_t & };
 
 %include "../../drivers.gpu.control-library/Include/igcl_api.h"
 %include "../../drivers.gpu.control-library/Source/cApiWrapper.cpp"
