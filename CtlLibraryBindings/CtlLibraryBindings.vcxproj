@@ -133,6 +133,9 @@
       <EnableUAC>false</EnableUAC>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>powershell -ExecutionPolicy Bypass -File "..\change_enum_to_uint.ps1"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -171,16 +174,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="CtlLibraryBindings.i.old">
+    <CustomBuild Include="CtlLibraryBindings.i">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -namespace CtlLibraryBindings -dllimport CtlLibraryBindings -outdir .\..\CtlLibraryWrapper\Bindings CtlLibraryBindings.i</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename)_wrap.cxx</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -namespace CtlLibraryBindings -dllimport CtlLibraryBindings -outdir .\..\CtlLibraryWrapper\Bindings CtlLibraryBindings.i</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">swig -csharp -c++ -namespace CtlLibraryBindings -dllimport CtlLibraryBindings -outdir ..\Bindings CtlLibraryBindings.i</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename)_wrap.cxx</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">swig -csharp -c++ -namespace CtlLibraryBindings -dllimport CtlLibraryBindings -outdir ..\Bindings CtlLibraryBindings.i</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename)_wrap.cxx</Outputs>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CtlLibraryBindings.i" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
